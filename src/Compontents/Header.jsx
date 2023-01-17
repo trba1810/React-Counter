@@ -8,7 +8,7 @@ export default function Header() {
         alt="react"
         style={{ height: "55px", vertigalAlign: "top" }}
       />
-      <span className="h2 pt-4 text-white-50">Counter</span>
+      <span className="h2 pt-4 text-white-50">Counter Aplikacija</span>
     </div>
   );
 }
