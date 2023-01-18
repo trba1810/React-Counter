@@ -6,31 +6,50 @@ class Counter extends React.Component {
   constructor(props) {
     super(props);
     this.handleAttack = this.handleAttack.bind(this);
-    this.defendeAttack = this.defendeAttack.bind(this);
+    this.handleDefense = this.handleDefense.bind(this);
     this.state = {
       count: 0,
     };
   }
 
-  handleAttack() {
+  handleAttack = () => {
     this.setState((prevState) => {
+      let newCount = prevState.count + Math.round(Math.random() * 10);
       return {
-        count: prevState.count + 1,
+        count: newCount,
       };
     });
-  }
+  };
 
-  defendeAttack() {
+  handleDefense = () => {
     this.setState((prevState) => {
+      let newCount = prevState.count - Math.round(Math.random() * 10);
       return {
-        count: prevState.count - 1,
+        count: newCount,
       };
     });
-  }
+  };
+
+  handleRandomPlay = () => {
+    let playMode = Math.round(Math.random());
+    if (playMode === 0) {
+      this.handleAttack();
+    } else {
+      this.handleDefense();
+    }
+  };
+
+  handleReset = () => {
+    this.setState(() => {
+      return {
+        count: 0,
+      };
+    });
+  };
 
   render() {
     return (
-      <div className="row text-white text-center">
+      <div className="row text-white text-center mt-3">
         <h1>Rezultat: {this.state.count}</h1>
         <p>Pobeda na +10 i poraz na -10</p>
         <p>Poslednji potez:</p>
@@ -58,12 +77,22 @@ class Counter extends React.Component {
             alt="defend"
             className="p-4 rounded"
             src={defend}
-            onClick={this.defendeAttack}
+            onClick={this.handleDefense}
           />
         </div>
-        <div className="col-12 col-md-4 offset-md-4">
-          <button className="btn btn-secondary w-100 mt-2">Random Play</button>
-          <button className="btn btn-warning w-100 mt-2">Reset</button>
+        <div className="col-12 col-md-4 offset-md-4 mt-4">
+          <button
+            className="btn btn-secondary w-100 mt-2"
+            onClick={this.handleRandomPlay}
+          >
+            Random Play
+          </button>
+          <button
+            className="btn btn-warning w-100 mt-2"
+            onClick={this.handleReset}
+          >
+            Reset
+          </button>
         </div>
       </div>
     );
