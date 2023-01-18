@@ -9,6 +9,8 @@ class Counter extends React.Component {
     this.handleDefense = this.handleDefense.bind(this);
     this.state = {
       count: 0,
+      status: "",
+      lastPlay: "",
     };
   }
 
@@ -17,6 +19,8 @@ class Counter extends React.Component {
       let newCount = prevState.count + Math.round(Math.random() * 10);
       return {
         count: newCount,
+        status: newCount > 10 ? "Pobeda!" : prevState.status,
+        lastPlay: "Napad",
       };
     });
   };
@@ -26,6 +30,8 @@ class Counter extends React.Component {
       let newCount = prevState.count - Math.round(Math.random() * 10);
       return {
         count: newCount,
+        status: newCount < -10 ? "Poraz!" : prevState.status,
+        lastPlay: "Odbrana",
       };
     });
   };
@@ -43,6 +49,8 @@ class Counter extends React.Component {
     this.setState(() => {
       return {
         count: 0,
+        status: "",
+        lastPlay: "",
       };
     });
   };
@@ -52,8 +60,8 @@ class Counter extends React.Component {
       <div className="row text-white text-center mt-3">
         <h1>Rezultat: {this.state.count}</h1>
         <p>Pobeda na +10 i poraz na -10</p>
-        <p>Poslednji potez:</p>
-        <p>Status:</p>
+        <p>Poslednji potez:{this.state.lastPlay}</p>
+        <p>Status:{this.state.status}</p>
         <div className="col-6 col-md-3 mx-auto">
           <img
             style={{
